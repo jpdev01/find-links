@@ -8,15 +8,22 @@ function handleError(error) {
 function findLink(text) {
     const regex = /\(https?:\/\/[^\s?#.].[^\s]*\)/gm
 
-    const result = [...text.matchAll(regex)];
-    console.log(result);
+    const resultList = [...text.matchAll(regex)];
+    const formattedResult = resultList.map(result =>
+        ({
+            [result[1]]: result[2]
+        })
+    );
+    return formattedResult;
 }
 
 async function getFile(filePath) {
     try {
         const encoding = 'utf-8';
         const text = await fs.promises.readFile(filePath, encoding)
-        findLink(text);
+
+        const result = findLink(text);
+        console.log(result);
     } catch (error) {
         handleError(error);
     }
