@@ -23,7 +23,7 @@ async function getFile(filePath) {
         const text = await fs.promises.readFile(filePath, encoding)
 
         const result = findLink(text);
-        console.log(result);
+        return result;
     } catch (error) {
         handleError(error);
     }
@@ -33,4 +33,4 @@ async function getFile(filePath) {
     //     .catch(handleError);
 }
 
-getFile('./arquivos/texto.md');
+export default getFile;
