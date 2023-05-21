@@ -1,15 +1,21 @@
 import fs from 'fs';
-import chalk from 'chalk'; //es6 preferir assim que require(x)
+import chalk from 'chalk';
 
 function handleError(error) {
     throw new Error(chalk.red('Falha ao ler arquivo: ', error.code));
 }
 
+function findLink(text) {
+    const regex = /\(https?:\/\/[^\s?#.].[^\s]*\)/gm
+
+    const result = [...text.matchAll(regex)];
+    console.log(result);
+}
 async function getFile(filePath) {
     try {
         const encoding = 'utf-8';
         const text = await fs.promises.readFile(filePath, encoding)
-        console.log(chalk.green(text));
+        findLink(text);
     } catch (error) {
         handleError(error);
     }
