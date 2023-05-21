@@ -11,6 +11,7 @@ function findLink(text) {
     const result = [...text.matchAll(regex)];
     console.log(result);
 }
+
 async function getFile(filePath) {
     try {
         const encoding = 'utf-8';
